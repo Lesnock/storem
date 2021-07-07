@@ -4,5 +4,8 @@
   "description": "A reactive store for global state management in JS",
   "main": "index.js",
   "author": "Caio Lesnock <caio.dev@outlook.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
 }
