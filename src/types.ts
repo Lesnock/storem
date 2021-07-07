@@ -1,5 +1,3 @@
-import { defaultConfigs } from "./config"
-
 type StoreData = { [dataName: string]: any }
 
 type StoreEffects = { [dataName: string]: Effect[] }

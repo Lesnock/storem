@@ -3,7 +3,7 @@ interface StoreConfigs {
   debug?: boolean;
 }
 
-const defaultConfigs = {
+const defaultConfigs: StoreConfigs = {
   persist: false,
   debug: false
 }
