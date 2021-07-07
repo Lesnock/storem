@@ -2,7 +2,7 @@
   "name": "storem",
   "version": "1.0.0",
   "description": "A reactive store for global state management in JS",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Caio Lesnock <caio.dev@outlook.com>",
   "license": "MIT",
   "devDependencies": {

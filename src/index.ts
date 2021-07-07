@@ -23,7 +23,7 @@ class Store {
     this.effects = {}
     this.configs = { ...defaultConfigs, ...configs }
 
-    if (!this.isRunningOnNode && this.configs.persist) {
+    if (!!this.configs.persist && !this.isRunningOnNode()) {
       this.data = loadData()
     }
   }
