@@ -1,6 +1,6 @@
 {
   "name": "storem",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A reactive store for global state management in JS",
   "main": "dist/index.js",
   "author": "Caio Lesnock <caio.dev@outlook.com>",
