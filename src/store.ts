@@ -1,5 +1,4 @@
 import { log } from './log'
-import { IStore } from './interfaces'
 import { loadData, saveData } from './storage'
 import { defaultConfigs, StoreConfigs } from './config'
 import { StoreData, StoreEffects, Effect } from './types'
