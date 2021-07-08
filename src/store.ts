@@ -1,3 +1,5 @@
+import { log } from './log'
+import { IStore } from './interfaces'
 import { loadData, saveData } from './storage'
 import { defaultConfigs, StoreConfigs } from './config'
 import { StoreData, StoreEffects, Effect } from './types'
@@ -19,12 +21,17 @@ class Store {
   configs: StoreConfigs
 
   constructor(configs: StoreConfigs = {}) {
+    configs.debug && log('Initializing store')
+
     this.data = {}
     this.effects = {}
     this.configs = { ...defaultConfigs, ...configs }
 
+    configs.debug && log('Configurations:', configs)
+
     if (!!this.configs.persist && !this.isRunningOnNode()) {
       this.data = loadData()
+      configs.debug && log('Loaded data from localStorage:', this.data)
     }
   }
 
@@ -49,11 +56,14 @@ class Store {
 
       // Set data
       this.data[name] = value
+
+      this.configs.debug && log(`Set data`, name, value)
     })
 
     // Save data to storage
     if (!!this.configs.persist && !this.isRunningOnNode()) {
       saveData(this.data)
+      this.configs.debug && log('Save data to localStorage')
     }
   }
 
@@ -92,6 +102,8 @@ class Store {
 
       // Delete data
       this.data[name] = undefined
+
+      this.configs.debug && log(`Delete data ${name}`)
 
       if (!!this.configs.reactOnDelete) {
         this.runEffects(name, value, oldValue)
@@ -137,6 +149,8 @@ class Store {
     }
 
     this.effects[dataName].push(effect)
+
+    this.configs.debug && log(`Create effect for data: ${dataName}`)
   }
 
   private runEffects(dataName: string | number, value?: any, oldValue?: any) {
