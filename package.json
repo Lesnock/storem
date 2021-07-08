@@ -5,6 +5,13 @@
   "main": "dist/index.js",
   "author": "Caio Lesnock <caio.dev@outlook.com>",
   "license": "MIT",
+  "keywords": [
+    "javascript",
+    "store",
+    "state management",
+    "state",
+    "global state"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Lesnock/storem"
