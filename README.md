@@ -15,6 +15,7 @@ A reactive store of data for global state management in JS.
   - [`has`](#has)
 - [`The reactive part`](#the-reactive-part)
   - [`listen`](#listen)
+- [`Mutations`](#mutations)
 - [`Persisting Data`](#persisting-data)
   - [`Integration with React`](#using-storem-with-react)
   - [`Tutorials`](#tutorials)
@@ -202,6 +203,31 @@ store.listen('cartItems', (cardItems) => {
   recalculateTotal(cardItems)
 })
 ```
+
+## Mutations
+
+Mutations are functions that can be registered in the store to **alter** his data. It is possible to create a mutation using the **setMutation** method, passing name and function as arguments. The passed function will receive the complete store state as argument. Let's create a mutation that increment a counter, for example:
+
+```javascript
+// Create a counter inside the store
+store.set({ counter: 1 })
+
+// Create a mutation to increment the counter
+store.setMutation('INCREMENT', state => {
+  state.counter++
+})
+```
+
+To run a mutation, we use the **runMutation** method passing the mutation name as argument:
+
+```javascript
+store.runMutation('INCREMENT') // Increment counter
+store.runMutation('INCREMENT') // Increment counter again
+
+console.log(store.get('counter')) // 3
+```
+
+**Obs**: Storem **does not** react to data change inside mutations. In others words, listeners will not be executed when data changes occurs inside a mutation.
 
 ## Persisting Data
 
