@@ -1,7 +1,7 @@
 import { log } from './log'
 import { loadData, saveData } from './storage'
 import { defaultConfigs, StoreConfigs } from './config'
-import { StoreData, StoreEffects, Effect } from './types'
+import { StoreData, StoreEffects, Effect, Mutation } from './types'
 
 class Store {
   /**
@@ -19,11 +19,17 @@ class Store {
    */
   configs: StoreConfigs
 
+  /**
+   * Store mutations
+   */
+  mutations: { [name: string]: Mutation }
+
   constructor(configs: StoreConfigs = {}) {
     configs.debug && log('Initializing store')
 
     this.data = {}
     this.effects = {}
+    this.mutations = {}
     this.configs = { ...defaultConfigs, ...configs }
 
     configs.debug && log('Configurations:', configs)
@@ -40,6 +46,17 @@ class Store {
    */
   private isRunningOnNode(): boolean {
     return typeof window === 'undefined'
+  }
+
+  /**
+   * Run the effects
+   */
+  private runEffects(dataName: string | number, value?: any, oldValue?: any) {
+    if (this.effects[dataName]) {
+      this.effects[dataName].forEach(effect => {
+        effect(value, oldValue)
+      })
+    }
   }
 
   /**
@@ -159,12 +176,26 @@ class Store {
     this.configs.debug && log(`Create effect for data: ${dataName}`)
   }
 
-  private runEffects(dataName: string | number, value?: any, oldValue?: any) {
-    if (this.effects[dataName]) {
-      this.effects[dataName].forEach(effect => {
-        effect(value, oldValue)
-      })
+  /**
+   * Set a store mutation
+   */
+  setMutation(name: string, mutation: Mutation) {
+    this.mutations[name] = mutation
+
+    this.configs.debug && log(`Create mutation: ${name}`)
+  }
+
+  /**
+   * Run a mutation
+   */
+  runMutation(name: string) {
+    if (!this.mutations[name]) {
+      throw new ReferenceError(`Mutation ${name} does not exists`)
     }
+
+    this.mutations[name](this.data)
+
+    this.configs.debug && log(`Run mutation: ${name}`)
   }
 }
 
