@@ -64,7 +64,7 @@ class Store {
    */
   set(data: StoreData): void {
     if (typeof data !== 'object') {
-      throw new Error('Error in Storem "set" method: argument should be an object')
+      throw new TypeError('Error in Storem "set" method: argument should be an object')
     }
 
     Object.keys(data).forEach(name => {
@@ -161,12 +161,6 @@ class Store {
    * Add an effect listener to a specific data in the store
    */
   listen(dataName: string | number, effect: Effect) {
-    if (!this.data[dataName]) {
-      throw new Error(
-        `Error in Storem listen method: Data with name ${dataName} does not exists in the store.`
-      )
-    }
-
     if (!this.effects[dataName]) {
       this.effects[dataName] = []
     }
