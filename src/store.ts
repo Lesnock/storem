@@ -34,6 +34,10 @@ class Store {
     }
   }
 
+  /**
+   * Check if storem is running on node platform
+   * @returns {Boolean} isRunningOnNode
+   */
   private isRunningOnNode(): boolean {
     return typeof window === 'undefined'
   }
@@ -93,6 +97,9 @@ class Store {
     return data
   }
 
+  /**
+   * Delete specific data to the store
+   */
   delete(dataName: string | number | Array<string | number>) {
     // Delete function
     const deleteData = (name: string | number) => {
