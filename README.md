@@ -227,7 +227,23 @@ store.runMutation('INCREMENT') // Increment counter again
 console.log(store.get('counter')) // 3
 ```
 
-**Obs**: Storem **does not** react to data change inside mutations. In others words, listeners will not be executed when data changes occurs inside a mutation.
+You can either pass **arguments** to mutations:
+
+```javascript
+// Create quantity data inside the store with value 0
+store.set({ quantity: 0 })
+
+// Create mutation receiving a "quantity" argument
+store.setMutation('ADD_QUANTITY', (state, quantity) => {
+  state.quantity += quantity
+})
+
+store.runMutation('ADD_QUANTITY', 10) // Will add 10 to state.quantity
+
+console.log(store.get('quantity')) // 10
+```
+
+**Obs**: Storem **does not** react to data change inside mutations. In others words, listeners **will not** be executed when data changes occurs inside a mutation.
 
 ## Persisting Data
 
