@@ -182,12 +182,12 @@ class Store {
   /**
    * Run a mutation
    */
-  runMutation(name: string) {
+  runMutation(name: string, ...args: any) {
     if (!this.mutations[name]) {
       throw new ReferenceError(`Mutation ${name} does not exists`)
     }
 
-    this.mutations[name](this.data)
+    this.mutations[name](this.data, ...args)
 
     this.configs.debug && log(`Run mutation: ${name}`)
   }

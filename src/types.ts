@@ -4,7 +4,7 @@ type StoreEffects = { [dataName: string]: Effect[] }
 
 type Effect = (value?: any, oldValue?: any) => any
 
-type Mutation = (state: StoreData) => void
+type Mutation = (state: StoreData, ...args: any) => void
 
 export {
   StoreData,
