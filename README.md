@@ -63,9 +63,11 @@ store.get('name') // undefined
 ```
 
 ### Creating the store
-To start using Storem we should create a file to instantiate the store. We can create multiple stores or create a **single source of truth** (**recommended**):
+To start using Storem we should create a file to instantiate the store and export it:
 
-Example with **multiple** data sources:
+<!-- To start using Storem we should create a file to instantiate the store. We can create multiple stores or create a **single source of truth** (**recommended**): -->
+
+<!-- Example with **multiple** data sources:
 ```javascript
 // store.js
 import { Store } from 'storem'
@@ -81,7 +83,7 @@ export {
 }
 ```
 
-Example with a **single** source of data (single source of truth)
+Example with a **single** source of data (single source of truth) -->
 ```javascript
 // store.js
 import { Store } from 'storem';
@@ -90,6 +92,8 @@ const store = new Store({ persist: true });
 
 export default { store };
 ```
+
+Obs: Storem does not have support for multiple stores yet.
 
 ## Configurations
 
@@ -102,7 +106,7 @@ Determines if the data should be persisted throughout the pages (uses localStora
 Turn on debug mode. If enabled, all store changes will be logged in the console.
 
 - `reactOnDelete`
-If true, will execute the callback events when data is deleted in the store.
+If true, will execute the callback events when data is deleted from the store.
 
 Example:
 
